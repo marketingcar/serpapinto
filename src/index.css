@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Global body styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  /* Primary site background gradient using brand colors */
+  @apply bg-gradient-to-br from-brandDeep to-brandSoft text-slate-800;
+}
+
+/* COMPONENT LAYER */
+@layer components {
+  /* Reusable brand button with animated rollover fill */
+  .btn-brand {
+    @apply relative overflow-hidden text-white text-lg font-medium shadow-lg transition-all duration-300
+           bg-gradient-to-r from-brandDeep to-brandSoft;
+  }
+
+  .btn-brand::before {
+    content: '';
+    @apply absolute inset-0
+           bg-gradient-to-r from-brandDeep to-brandGold
+           scale-x-0 origin-left transition-transform duration-300;
+  }
+
+  .btn-brand:hover::before {
+    @apply scale-x-100;
+  }
+
+  /* Legacy class for backwards compatibility */
+  .button-fill-animation {
+    @apply relative overflow-hidden transition-all duration-500 ease-in-out;
+  }
+
+  .button-fill-animation::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-full -z-10
+           scale-x-0 origin-left transition-transform duration-500 ease-in-out
+           bg-gradient-to-r from-brandDeep to-brandGold;
+  }
+
+  .button-fill-animation:hover::before {
+    @apply scale-x-100;
+  }
+
+  /* New gold fill hover effect */
+  .btn-gold-hover {
+    @apply relative overflow-hidden transition-all duration-500 ease-in-out;
+  }
+  .btn-gold-hover::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-full -z-10
+           bg-brandGold
+           scale-x-0 origin-left transition-transform duration-500 ease-in-out;
+  }
+  .btn-gold-hover:hover::before {
+    @apply scale-x-100;
+  }
+}
+
+/* UTILITIES LAYER */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text utility */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brandDeep to-brandSoft bg-clip-text text-transparent;
+  }
+
+  /* Section background helpers */
+  .bg-primary-gradient {
+    @apply bg-gradient-to-br from-brandDeep to-brandSoft;
+  }
+
+  .bg-secondary-gradient {
+    @apply bg-gradient-to-r from-brandDeep to-brandGold;
+  }
+}
+
+/* ---------------------------------------------------- */
+/* LEGACY GRADIENT OVERRIDES — SITE-WIDE AUTO FIX PATCH */
+/* ---------------------------------------------------- */
+
+/* Old teal/cyan hero backgrounds */
+.bg-gradient-to-br.from-teal-50.via-cyan-50.to-sky-50,
+.bg-gradient-to-br.from-emerald-50.via-teal-50.to-cyan-50,
+.bg-gradient-to-br.from-teal.to-cyan,
+.bg-gradient-to-br.from-emerald-600.via-teal-600.to-cyan-600 {
+  background-image: linear-gradient(to bottom right, #f0f4f8, #ffffff) !important;
+}
+
+/* Old emerald/teal buttons */
+.bg-gradient-to-r.from-emerald-600.to-teal-600 {
+  background-image: linear-gradient(to right, #566e61, #abcdb3) !important;
+  color: #ffffff !important;
+}
+
+/* Hover/overlay layers now use #566e61 → #deb47a */
+.before\:bg-gradient-to-r.before\:from-\[\#566e61\].before\:to-\[\#deb47a\],
+.before\:bg-gradient-to-r.before\:from-emerald-700.before\:to-teal-700::before,
+.before\:bg-emerald-700::before {
+  background-image: linear-gradient(to right, #566e61, #deb47a) !important;
+}
+
+/* Backup rule for inline emerald/teal hover states */
+.bg-gradient-to-r.from-emerald-700.to-teal-700 {
+  background-image: linear-gradient(to right, #566e61, #deb47a) !important;
+  color: #ffffff !important;
+}
+
+/* --- Additional override for gradient icons / badges --- */
+.bg-gradient-to-br.from-emerald-600.to-teal-600 {
+  background-image: linear-gradient(to bottom right, #566e61, #566e61) !important;
+}
+
+.bg-gradient-to-br.from-emerald-700.to-teal-700 {
+  background-image: linear-gradient(to bottom right, #566e61, #deb47a) !important;
+}
+
+.text-emerald-600 {
+    color: #566e61 !important;
+}
+
+.text-emerald-100 {
+    color: #e2e8f0 !important; /* Using a light gray for contrast on dark green */
+}
